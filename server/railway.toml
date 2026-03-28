@@ -1,0 +1,5 @@
+[build]
+buildCommand = "npm install --production"
+
+[deploy]
+startCommand = "node index.js"
