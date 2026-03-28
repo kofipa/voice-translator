@@ -21,7 +21,6 @@ const MODES = [
     description: 'Make calls where each person hears their own language',
     icon: '📞',
     screen: 'Call',
-    comingSoon: true,
   },
 ];
 
