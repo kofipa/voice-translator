@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView, Share } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system/legacy';
@@ -206,7 +206,16 @@ export default function CallScreen() {
           <Text style={styles.codeText}>{roomCode}</Text>
         </View>
 
-        <Text style={styles.hint}>Ask them to open the app, tap "Translated Call" and enter this code</Text>
+        <TouchableOpacity
+          style={styles.shareBtn}
+          onPress={() => Share.share({
+            message: `Join my Voice Translator call! Open the app, tap "Translated Call" and enter code: ${roomCode}`,
+          })}
+        >
+          <Text style={styles.shareBtnText}>Share Code via...</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.hint}>Or ask them to open the app, tap "Translated Call" and enter the code above</Text>
 
         <TouchableOpacity style={styles.cancelBtn} onPress={() => setScreen('lobby')}>
           <Text style={styles.cancelBtnText}>Cancel</Text>
@@ -267,6 +276,8 @@ const styles = StyleSheet.create({
   status: { color: '#e74c3c', textAlign: 'center', marginTop: 16, fontSize: 13 },
   codeDisplay: { backgroundColor: '#1e1e1e', borderRadius: 20, padding: 40, alignItems: 'center', marginVertical: 24 },
   codeText: { color: '#4f9eff', fontSize: 56, fontWeight: '800', letterSpacing: 12 },
+  shareBtn: { backgroundColor: '#4f9eff', borderRadius: 12, paddingVertical: 16, alignItems: 'center', marginBottom: 16 },
+  shareBtnText: { color: '#fff', fontSize: 16, fontWeight: '700' },
   hint: { color: '#555', textAlign: 'center', fontSize: 14, lineHeight: 22, marginBottom: 32 },
   cancelBtn: { borderWidth: 1, borderColor: '#333', borderRadius: 12, paddingVertical: 14, alignItems: 'center' },
   cancelBtnText: { color: '#888', fontSize: 15 },
