@@ -8,7 +8,7 @@ import * as FileSystem from 'expo-file-system/legacy';
 import LanguagePicker from './components/LanguagePicker';
 import TextInputMode from './components/TextInputMode';
 
-const SERVER_URL = 'ws://192.168.0.245:3000';
+const SERVER_URL = 'wss://voice-translator-production-39cb.up.railway.app';
 
 export default function App() {
   const [targetLanguage, setTargetLanguage] = useState({ code: 'en', label: 'English' });
