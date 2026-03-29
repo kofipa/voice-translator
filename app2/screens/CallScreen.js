@@ -114,11 +114,7 @@ export default function CallScreen({ route }) {
 
       } else if (data.type === 'call_sent') {
         addMessage({ from: 'me', text: data.original, detected: data.detectedLanguage });
-        // Server acknowledged our message — safe to start listening again
-        if (callActiveRef.current && !isPlayingRef.current) {
-          setMicState('listening');
-          startNewRecording();
-        }
+        setMicState('listening');
 
       } else if (data.type === 'call_received') {
         addMessage({ from: 'them', text: data.original, translated: data.translated, detected: data.detectedLanguage });
@@ -151,7 +147,8 @@ export default function CallScreen({ route }) {
         setScreen('lobby');
 
       } else if (data.type === 'error') {
-        setStatus(data.message);
+        // Don't surface "no speech" as an error — it's a normal VAD false-trigger
+        if (data.message !== 'No speech detected') setStatus(data.message);
         // If rejoin failed (room expired), go back to lobby
         if (reconnectingRef.current) {
           reconnectingRef.current = false;
@@ -368,7 +365,7 @@ export default function CallScreen({ route }) {
       }
     } catch (err) {
       if (callActiveRef.current) setStatus(`Error: ${err.message}`);
-      // On error, restart recording so the call doesn't go silent
+    } finally {
       if (callActiveRef.current) await startNewRecording();
     }
   }
