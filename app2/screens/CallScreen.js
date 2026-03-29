@@ -8,8 +8,8 @@ import { usePersistedLanguage } from '../hooks/usePersistedLanguage';
 
 const SERVER_URL = 'wss://voice-translator-production-39cb.up.railway.app';
 const SILENCE_THRESHOLD_DB = -45;  // dBFS — below this is silence
-const SILENCE_CONSEC_COUNT = 2;    // consecutive silent readings before starting the timer (~300 ms)
-const SILENCE_DURATION_MS = 1200;  // ms of confirmed silence before sending
+const SILENCE_CONSEC_COUNT = 1;    // consecutive silent readings before starting the timer (~150 ms)
+const SILENCE_DURATION_MS = 900;   // ms of confirmed silence before sending
 const MIN_SPEECH_MS = 400;         // ignore very short noise bursts
 
 export default function CallScreen({ route }) {
