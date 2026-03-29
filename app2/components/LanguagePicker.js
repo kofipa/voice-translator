@@ -44,7 +44,7 @@ const LANGUAGES = [
   { code: 'he', label: 'Hebrew' },
 ];
 
-export default function LanguagePicker({ selected, onSelect }) {
+export default function LanguagePicker({ selected, onSelect, label = 'My language' }) {
   const [visible, setVisible] = useState(false);
   const [search, setSearch] = useState('');
 
@@ -55,7 +55,7 @@ export default function LanguagePicker({ selected, onSelect }) {
   return (
     <>
       <TouchableOpacity style={styles.picker} onPress={() => setVisible(true)}>
-        <Text style={styles.pickerLabel}>My language</Text>
+        <Text style={styles.pickerLabel}>{label}</Text>
         <Text style={styles.pickerValue}>{selected.label} ▾</Text>
       </TouchableOpacity>
 
